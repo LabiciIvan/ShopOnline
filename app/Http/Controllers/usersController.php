@@ -5,10 +5,19 @@ use App\Models\Products;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreOrder;
 use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 class usersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index', 'show');
+    }
+
     public function index(Products $request) {
+
+        // dd(Auth::id());
 
         return view('users.products', ['products' => Products::all()]);
     }

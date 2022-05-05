@@ -1,46 +1,36 @@
 @extends('layouts.users')
 
-@section('title', 'Log In')
-
+@section('title', 'LogIn Store-Online')
 
 @section('products')
-<form action="{{ route('login')}}" method="POST" class="form-group w-50 h-100">
-  @csrf
+<div class="d-flex flex-column w-100 h-100 justify-content-center align-items-center mt-4">
+  <form class="d-flex flex-column w-50 h-10 align-items-center" action="{{ route('login') }}" method="POST">
+    @csrf
+      <div class="d-flex flex-column w-25 h-100">
 
-  <div class="form-group">
-    <label for="">E-mail</label>
-    <input type="text" name="email" value="{{ old('email') }}" required 
-      class="form-control  {{ $errors->has('email') ? ' is-invalid': '' }}">
-      @if($errors->has('email')) 
-      <span class="invalid-feedback">
-        <strong>{{ $errors->first('email') }}</strong>
-      </span>
-    @endif
-  </div>
+        <label class="form-label" for="email">Email</label>
+        <input class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" type="text" name="email" id="email">
+          @if ($errors->has('email'))
+            <span class="invalid-feedback">{{ $errors->first('email') }}</span>
+          @endif
 
-  <div class="form-group">
-    <label for="">Password</label>
-    <input type="text" name="password"  required 
-      class="form-control  {{ $errors->has('password') ? ' is-invalid': '' }}">
-      @if($errors->has('password')) 
-      <span class="invalid-feedback">
-        <strong>{{ $errors->first('password') }}</strong>
-      </span>
-    @endif
-  </div>
 
-  <div class="form-group">
-    <div>
-      <input type="checkbox" name="remember" class="form-check-input"
-        value="{{ old('rememeber') ? 'checked': '' }}">
+        <label class="form-label" for="password">Password</label>
+        <input class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" type="text" name="password" id="password">
+          @if ($errors->has('password'))
+            <span class="invalid-feedback">{{ $errors->first('password') }}</span>
+          @endif
 
-        <label class="form-check-label" for="remember">
-          Remember Me
-        </label>
-    </div>
-  </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="remember" value="{{ old('remember') ? 'checked' : '' }}">
+              <label class="form-check-label"  for="remember">Remember Me</label>
+            </div>
+          </div>
 
-  <button type="submit" class="btn btn-primary btn-block">Login</button>
-</form>
+        <input class="btn btn-primary mt-4" type="submit" value="Log In">
+      </div>
 
+  </form>
+</div>
 @endsection

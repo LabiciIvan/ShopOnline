@@ -14,5 +14,6 @@ class Products extends Model
         
         return $this->hasMany('App\Models\Review');
     }
+    
     use HasFactory;
 }

@@ -1,52 +1,41 @@
 @extends('layouts.users')
 
-@section('title', 'Register')
+@section('title' ,'Register to Store-Online')
 
 @section('products')
+  <div class="d-flex flex-column w-100 h-100 justify-content-center align-items-center mt-4">
+    <form class="d-flex flex-column w-50 h-10 align-items-center" action="{{ route('register') }}" method="POST">
+      @csrf
+        <div class="d-flex flex-column w-25 h-100">
+          <label class="form-label" for="name">Name</label>
+          <input class="form-control {{ $errors->has('name') ? ' is-invalid': '' }}" type="text" name="name" id="name" value="{{ old('name') }}">
+            @if ($errors->has('name'))
+                <span class="invalid-feedback">
+                  {{ $errors->first('name') }}
+                </span>
+            @endif
 
-  <form action="{{ route('register')}}" method="POST" class="form-group w-50 h-100">
-    @csrf
+          <label class="form-label" for="email">Email</label>
+          <input class="form-control {{ $errors->has('email') ? ' is-invalid': '' }}" type="text" name="email" id="email" value="{{ old('email') }}">
+                @if ($errors->has('email'))
+                  <span class="invalid-feedback">
+                    {{ $errors->first('email') }}
+                  </span>
+                @endif
+          <label class="form-label" for="password">Password</label>
+          <input class="form-control {{ $errors->has('password') ? ' is-invalid': '' }}" type="text" name="password" id="password">
+                @if ($errors->has('password'))
+                <span class="invalid-feedback">
+                  {{ $errors->first('password') }}
+                </span>
+                @endif
+          <label class="form-label" for="password_confirmed">Repeat Password</label>
+          <input class="form-control" type="text" name="password_confirmation" id="password_confirmed">
+    
+          <input class="btn btn-primary mt-4" type="submit" value="Register">
+        </div>
 
-    <div class="form-group">
-      <label for="">Name</label>
-      <input type="text" name="name" value="{{ old('name') }}" required 
-        class="form-control {{ $errors->has('name') ? ' is-invalid': '' }}">
-
-       @if($errors->has('name')) 
-        <span class="invalid-feedback">
-          <strong>{{ $errors->first('name') }}</strong>
-        </span>
-      @endif
-    </div>
-
-    <div class="form-group">
-      <label for="">E-mail</label>
-      <input type="text" name="email" value="{{ old('email') }}" required 
-        class="form-control  {{ $errors->has('email') ? ' is-invalid': '' }}">
-        @if($errors->has('email')) 
-        <span class="invalid-feedback">
-          <strong>{{ $errors->first('email') }}</strong>
-        </span>
-      @endif
-    </div>
-
-    <div class="form-group">
-      <label for="">Password</label>
-      <input type="text" name="password"  required 
-        class="form-control  {{ $errors->has('password') ? ' is-invalid': '' }}">
-        @if($errors->has('password')) 
-        <span class="invalid-feedback">
-          <strong>{{ $errors->first('password') }}</strong>
-        </span>
-      @endif
-    </div>
-
-    <div class="form-group">
-      <label for="">Retyped Password</label>
-      <input type="text" name="password_confirmation" required class="form-control">
-    </div>
-
-    <button type="submit" class="btn btn-primary btn-block">Register</button>
-  </form>
-
+    </form>
+  </div>
+  
 @endsection
