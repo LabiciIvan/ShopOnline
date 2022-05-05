@@ -6,6 +6,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\User;
+use App\Models\Products;
+use App\Models\Review;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,7 +26,18 @@ class DatabaseSeeder extends Seeder
         //     'remember_token' => Str::random(10)
         // ]);
 
-        User::factory()->userName()->after()->create();
+        // User::factory()->userName()->after()->create();
 
+        // Products::factory(20)->addReview()->create();
+        // User::factory(10)->after()->create();
+        
+        
+        $product = Products::factory(20)->create();
+        
+        $review = Review::factory(50)->make()->each(function($review) use ($product) {
+            $review->products_id = $product->random()->id;
+            $review->save();
+        });
+        
     }
 }

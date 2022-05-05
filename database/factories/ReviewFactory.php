@@ -21,4 +21,5 @@ class ReviewFactory extends Factory
             'content' => $this->faker->sentence(3, true),
         ];
     }
+
 }

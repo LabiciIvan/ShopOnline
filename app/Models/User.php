@@ -9,7 +9,13 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     public function profile() {
+
         return $this->hasOne('App\Models\Profile');
+    }
+
+    public function order() {
+
+        return $this->hasMany('App\Models\Order');
     }
 
     use HasFactory, Notifiable;

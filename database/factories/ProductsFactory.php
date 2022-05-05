@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Products;
+use App\Models\Review;
 
 class ProductsFactory extends Factory
 {
@@ -22,5 +23,12 @@ class ProductsFactory extends Factory
                 'stock'=> $this->faker->randomDigitNot(0),
                 'price'=> $this->faker->numberBetween(10, 400)
         ];
+    }
+
+    public function addReview() {
+        
+        return $this->afterCreating(function($product) {
+            $product->review()->save(Review::factory()->make());
+        });
     }
 }

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Profile;
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -37,6 +38,7 @@ class UserFactory extends Factory
         return $this->afterCreating(function($author) {
 
             $author->profile()->save(Profile::factory()->make());
+            $author->order()->save(Order::factory()->make());
         });
     }
 

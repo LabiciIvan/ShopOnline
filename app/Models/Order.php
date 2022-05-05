@@ -9,5 +9,10 @@ class Order extends Model
 {
     protected $fillable = ['name', 'phone', 'address', 'order'];
 
+    public function user() {
+        
+        return $this->belongsTo('App\Models\User');
+    }
+
     use HasFactory;
 }
